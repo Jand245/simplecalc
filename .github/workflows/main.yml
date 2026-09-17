@@ -49,10 +49,4 @@ jobs:
         run: flutter test --coverage
 
 
-      - name: 🏗️ Build APKs
-        run: flutter build apk --release 
-
-      - name: 📦 Prepare artifacts
-        run: |
-          mkdir -p artifacts
-          cp build/app/outputs/flutter-apk/*.apk artifacts/
+    
