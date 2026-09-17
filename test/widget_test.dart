@@ -26,4 +26,31 @@ void main() {
     }
     expect(find.text('Error'), findsOneWidget);
   });
+
+  testWidgets('two plus two', (tester) async {
+    //setup
+    await tester.pumpWidget(const MyApp());
+    expect(find.byKey(const Key('display')), findsOneWidget);
+
+    // DO SOMETHING
+    //press 2
+    await tester.tap(find.text('2').last);
+    await tester.pump();
+
+    //press +
+    await tester.tap(find.text('+').last);
+    await tester.pump();
+
+    //press 2
+    await tester.tap(find.text('2').last);
+    await tester.pump();
+
+    //press =
+    await tester.tap(find.text('=').last);
+    await tester.pump();
+    //check something
+
+    expect(find.text('4'), findsNWidgets(2));
+  });
+
 }
