@@ -53,4 +53,39 @@ void main() {
     expect(find.text('4'), findsNWidgets(2));
   });
 
+  testWidgets('one minus one equals zero', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    for (final key in ['1', '−', '1', '=']) {
+      await tester.tap(find.byKey(Key('button_$key')));
+      await tester.pump();
+    }
+    expect(tester.widget<Text>(find.byKey(const Key('display'))).data, '0');
+  });
+
+  testWidgets('three times three equals nine', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    for (final key in ['3', '×', '3', '=']) {
+      await tester.tap(find.byKey(Key('button_$key')));
+      await tester.pump();
+    }
+    expect(tester.widget<Text>(find.byKey(const Key('display'))).data, '9');
+  });
+
+  testWidgets('six divided by three equals two', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    for (final key in ['6', '÷', '3', '=']) {
+      await tester.tap(find.byKey(Key('button_$key')));
+      await tester.pump();
+    }
+    expect(tester.widget<Text>(find.byKey(const Key('display'))).data, '2');
+  });
+
+  testWidgets('one divided by zero shows an error', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    for (final key in ['1', '÷', '0', '=']) {
+      await tester.tap(find.byKey(Key('button_$key')));
+      await tester.pump();
+    }
+    expect(tester.widget<Text>(find.byKey(const Key('display'))).data, 'Error');
+  });
 }
